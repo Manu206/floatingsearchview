@@ -440,7 +440,7 @@ public class FloatingSearchView extends FrameLayout {
 
     private void setupViews(AttributeSet attrs) {
 
-        mSuggestionsSection.setEnabled(false);
+        setEnabled(false);
 
         if (attrs != null) {
             applyXmlAttributes(attrs);
@@ -1137,7 +1137,7 @@ public class FloatingSearchView extends FrameLayout {
     public void setDismissOnOutsideClick(boolean enable) {
 
         mDismissOnOutsideTouch = enable;
-        mSuggestionsSection.setOnTouchListener(new OnTouchListener() {
+        setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -1537,7 +1537,7 @@ public class FloatingSearchView extends FrameLayout {
 
         //if we don't have focus, we want to allow the client's views below our invisible
         //screen-covering view to handle touches
-        mSuggestionsSection.setEnabled(focused);
+        setEnabled(focused);
     }
 
     private void changeIcon(ImageView imageView, Drawable newIcon, boolean withAnim) {
@@ -1884,7 +1884,7 @@ public class FloatingSearchView extends FrameLayout {
         setCloseSearchOnKeyboardDismiss(savedState.dismissOnSoftKeyboardDismiss);
         setDismissFocusOnItemSelection(savedState.dismissFocusOnSuggestionItemClick);
 
-        mSuggestionsSection.setEnabled(mIsFocused);
+        setEnabled(mIsFocused);
         if (mIsFocused) {
 
             mBackgroundDrawable.setAlpha(BACKGROUND_DRAWABLE_ALPHA_SEARCH_FOCUSED);
