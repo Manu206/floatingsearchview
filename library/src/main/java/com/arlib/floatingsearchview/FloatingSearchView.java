@@ -1832,7 +1832,12 @@ public class FloatingSearchView extends FrameLayout {
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         SavedState savedState = new SavedState(superState);
+
         savedState.suggestions = mSuggestionsAdapter.getDataSet();
+        if (mSuggestionsAdapter.isReversed()) {
+            // Reverse a copy of the suggestions to avoid altering original list
+            Collections.reverse(new ArrayList<>(savedState.suggestions));
+        }
         savedState.isFocused = mIsFocused;
         savedState.query = getQuery();
         savedState.suggestionTextSize = mSuggestionsTextSizePx;
