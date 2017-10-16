@@ -1446,7 +1446,9 @@ public class FloatingSearchView extends FrameLayout {
     //returns the cumulative height that the current suggestion items take up or the given max if the
     //results is >= max. The max option allows us to avoid doing unnecessary and potentially long calculations.
     private int calculateSuggestionItemsHeight(List<? extends SearchSuggestion> suggestions, int max) {
-
+        if (mSuggestionsList.getChildCount() < suggestions.size()) {
+            return max;
+        }
         //todo
         // 'i < suggestions.size()' in the below 'for' seems unneeded, investigate if there is a use for it.
         int visibleItemsHeight = 0;
