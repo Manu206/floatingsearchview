@@ -146,7 +146,7 @@ public class FloatingSearchView extends FrameLayout {
     private OnFocusChangeListener mFocusChangeListener;
     private boolean mDismissFocusOnItemSelection = ATTRS_DISMISS_FOCUS_ON_ITEM_SELECTION_DEFAULT;
 
-    private CardView mQuerySection;
+    public CardView mQuerySection;
     private OnSearchListener mSearchListener;
     private SearchInputView mSearchInput;
     private int mQueryTextSize;
