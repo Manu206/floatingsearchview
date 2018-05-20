@@ -23,6 +23,7 @@ import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 public class ColorSuggestion implements SearchSuggestion {
 
     private String mColorName;
+    private String mColorAdditional;
     private boolean mIsHistory = false;
 
     public ColorSuggestion(String suggestion) {
@@ -31,6 +32,7 @@ public class ColorSuggestion implements SearchSuggestion {
 
     public ColorSuggestion(Parcel source) {
         this.mColorName = source.readString();
+        this.mColorAdditional = "Additional Information";
         this.mIsHistory = source.readInt() != 0;
     }
 
@@ -45,6 +47,11 @@ public class ColorSuggestion implements SearchSuggestion {
     @Override
     public String getBody() {
         return mColorName;
+    }
+
+    @Override
+    public String getAdditional() {
+        return "Additional Information";
     }
 
     public static final Creator<ColorSuggestion> CREATOR = new Creator<ColorSuggestion>() {

@@ -216,7 +216,7 @@ public class SlidingSearchResultsExampleFragment extends BaseExampleFragment {
         mSearchView.setOnBindSuggestionCallback(new SearchSuggestionsAdapter.OnBindSuggestionCallback() {
             @Override
             public void onBindSuggestion(View suggestionView, ImageView leftIcon,
-                                         TextView textView, SearchSuggestion item, int itemPosition) {
+                                         TextView textView, TextView textView2, SearchSuggestion item, int itemPosition) {
                 ColorSuggestion colorSuggestion = (ColorSuggestion) item;
 
                 String textColor = mIsDarkSearchTheme ? "#ffffff" : "#000000";
@@ -238,6 +238,7 @@ public class SlidingSearchResultsExampleFragment extends BaseExampleFragment {
                         .replaceFirst(mSearchView.getQuery(),
                                 "<font color=\"" + textLight + "\">" + mSearchView.getQuery() + "</font>");
                 textView.setText(Html.fromHtml(text));
+                textView2.setText(colorSuggestion.getAdditional());
             }
 
         });
