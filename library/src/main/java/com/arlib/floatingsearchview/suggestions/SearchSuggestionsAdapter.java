@@ -57,7 +57,7 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public interface OnBindSuggestionCallback {
 
-        void onBindSuggestion(View suggestionView, ImageView leftIcon, TextView textView,
+        void onBindSuggestion(View suggestionView, ImageView leftIcon, TextView textView, TextView textView2,
                               SearchSuggestion item, int itemPosition);
     }
 
@@ -73,8 +73,8 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
     public static class SearchSuggestionViewHolder extends RecyclerView.ViewHolder {
 
         public TextView body;
+        public TextView additional;
         public ImageView leftIcon;
-        public ImageView rightIcon;
 
         private Listener mListener;
 
@@ -90,19 +90,9 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
 
             mListener = listener;
             body = (TextView) v.findViewById(R.id.body);
+            additional = (TextView) v.findViewById(R.id.additional);
             leftIcon = (ImageView) v.findViewById(R.id.left_icon);
-            rightIcon = (ImageView) v.findViewById(R.id.right_icon);
 
-            rightIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    int adapterPosition = getAdapterPosition();
-                    if (mListener != null && adapterPosition != RecyclerView.NO_POSITION) {
-                        mListener.onMoveItemToSearchClicked(getAdapterPosition());
-                    }
-                }
-            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -167,8 +157,7 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
 
                 });
 
-        viewHolder.rightIcon.setImageDrawable(mRightIconDrawable);
-        viewHolder.body.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBodyTextSizePx);
+        if(mBodyTextSizePx>0) viewHolder.body.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBodyTextSizePx);
 
         return viewHolder;
     }
@@ -178,27 +167,16 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
 
         SearchSuggestionViewHolder viewHolder = (SearchSuggestionViewHolder) vh;
 
-        if (!mShowRightMoveUpBtn) {
-            viewHolder.rightIcon.setEnabled(false);
-            viewHolder.rightIcon.setVisibility(View.INVISIBLE);
-        } else {
-            viewHolder.rightIcon.setEnabled(true);
-            viewHolder.rightIcon.setVisibility(View.VISIBLE);
-        }
-
         SearchSuggestion suggestionItem = mSearchSuggestions.get(position);
         viewHolder.body.setText(suggestionItem.getBody());
+        viewHolder.body.setText(suggestionItem.getAdditional());
 
         if(mTextColor != -1){
             viewHolder.body.setTextColor(mTextColor);
         }
 
-        if(mRightIconColor != -1){
-            Util.setIconColor(viewHolder.rightIcon, mRightIconColor);
-        }
-
         if (mOnBindSuggestionCallback != null) {
-            mOnBindSuggestionCallback.onBindSuggestion(viewHolder.itemView, viewHolder.leftIcon, viewHolder.body,
+            mOnBindSuggestionCallback.onBindSuggestion(viewHolder.itemView, viewHolder.leftIcon, viewHolder.body, viewHolder.additional,
                     suggestionItem, position);
         }
     }
@@ -211,9 +189,9 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
     /**
      * Sets a custom layout resource which should be inflated instead of the default one.
      * Be sure to add the views of the default resource:
-     * - {@link ImageView} with id left_icon
-     * - {@link ImageView} with id right_icon
+     ** - {@link ImageView} with id left_icon
      * - {@link TextView} with id body
+     * - {@link TextView} with id additional
      * @param layoutResource Id of the custom layout resource
      */
     public void setLayoutResource(@LayoutRes int layoutResource) {

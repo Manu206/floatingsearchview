@@ -861,8 +861,8 @@ public class FloatingSearchView extends FrameLayout {
      * Pass -1 to use the default resource again.
      * Be sure to add the views of the default resource:
      * - {@link ImageView} with id left_icon
-     * - {@link ImageView} with id right_icon
      * - {@link TextView} with id body
+     * - {@link TextView} with id additional
      * @param layoutResource Id of the custom layout resource
      */
     public void setSuggestionsLayoutResource(@LayoutRes int layoutResource) {
