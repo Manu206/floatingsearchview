@@ -32,7 +32,6 @@ public class ColorSuggestion implements SearchSuggestion {
 
     public ColorSuggestion(Parcel source) {
         this.mColorName = source.readString();
-        this.mColorAdditional = "Additional Information";
         this.mIsHistory = source.readInt() != 0;
     }
 
@@ -52,6 +51,11 @@ public class ColorSuggestion implements SearchSuggestion {
     @Override
     public String getAdditional() {
         return "Additional Information";
+    }
+
+    @Override
+    public String getID() {
+        return "0";
     }
 
     public static final Creator<ColorSuggestion> CREATOR = new Creator<ColorSuggestion>() {

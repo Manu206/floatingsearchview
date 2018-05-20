@@ -222,6 +222,7 @@ public class SlidingSearchViewExampleFragment extends BaseExampleFragment {
          * Keep in mind that the suggestion list is a RecyclerView, so views are reused for different
          * items in the list.
          */
+
         mSearchView.setOnBindSuggestionCallback(new SearchSuggestionsAdapter.OnBindSuggestionCallback() {
             @Override
             public void onBindSuggestion(View suggestionView, ImageView leftIcon,
@@ -252,6 +253,7 @@ public class SlidingSearchViewExampleFragment extends BaseExampleFragment {
             }
 
         });
+
 
         /*
          * When the user types some text into the search field, a clear button (and 'x' to the

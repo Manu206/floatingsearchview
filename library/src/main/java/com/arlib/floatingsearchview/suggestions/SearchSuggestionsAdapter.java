@@ -53,7 +53,6 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<RecyclerView.
     private boolean mShowRightMoveUpBtn = false;
     private int mBodyTextSizePx;
     private int mTextColor = -1;
-    private int mRightIconColor = -1;
 
     public interface OnBindSuggestionCallback {
 
